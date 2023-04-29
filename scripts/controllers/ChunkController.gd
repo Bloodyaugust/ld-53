@@ -10,6 +10,14 @@ const OBSTACLE_SCENE: PackedScene = preload("res://actors/Obstacle.tscn")
 
 var _background_chunk_scenes: Array
 
+func _on_store_state_changed(state_key: String, substate) -> void:
+  match state_key:
+    "game":
+      match substate:
+        GameConstants.GAME_OVER:
+          GDUtil.queue_free_children(_dropoff_points_container)
+          GDUtil.queue_free_children(_obstacles_container)
+
 func _process(delta):
   var _chunks = _background_chunks_container.get_children()
 
@@ -40,6 +48,8 @@ func _process(delta):
       _obstacles_container.add_child(_new_obstacle)
 
 func _ready():
+  Store.state_changed.connect(_on_store_state_changed)
+
   var _chunk_scenes = DirAccess.get_files_at("res://actors/BackgroundChunks/")
 
   for _chunk_path in _chunk_scenes:

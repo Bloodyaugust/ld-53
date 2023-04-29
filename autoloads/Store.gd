@@ -28,8 +28,16 @@ func set_state(state_key: String, new_state) -> void:
   
 func _initialize():
   set_state("game", GameConstants.GAME_OVER)
+  state_changed.connect(_on_state_changed)
 
   (func(): ViewController.set_client_view(ViewController.CLIENT_VIEWS.SPLASH, ViewController.TRANSITION_TYPES.FADE)).call_deferred()
+
+func _on_state_changed(state_key: String, substate) -> void:
+  match state_key:
+    "game":
+      match substate:
+        GameConstants.GAME_OVER:
+          ViewController.set_client_view(ViewController.CLIENT_VIEWS.MAIN_MENU)
 
 func _ready():
   if FileAccess.file_exists(ClientConstants.CLIENT_PERSISTENT_STORE_PATH):

@@ -12,6 +12,7 @@ enum STATES {
 @export var data: PlayerData
 
 @onready var _area2D: Area2D = %PlayerArea
+@onready var _health: int = data.health
 @onready var _truck: Node2D = %Truck
 
 var _state: STATES = STATES.RUNNING
@@ -45,11 +46,16 @@ func _on_area_2d_entered(area: Area2D) -> void:
     if _tween:
       _tween.kill()
 
-    _state = STATES.TRIPPING
-    _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+    _health -= 1
+    
+    if _health <= 0:
+      Store.set_state("game", GameConstants.GAME_OVER)
+    else:
+      _state = STATES.TRIPPING
+      _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 
-    _tween.tween_property(self, "global_position", Vector2(global_position.x, 0.0), 0.15)
-    _tween.tween_callback(func(): _state = STATES.RUNNING)
+      _tween.tween_property(self, "global_position", Vector2(global_position.x, 0.0), 0.15)
+      _tween.tween_callback(func(): _state = STATES.RUNNING)
 
   if area.is_in_group("dropoff"):
     Store.set_state("packages", Store.state.packages + 1)
@@ -59,6 +65,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
     "game":
       match substate:
         GameConstants.GAME_OVER:
+          _health = data.health
           _state = STATES.DRIVING
           Store.state.move_speed = data.max_move_speed
         GameConstants.GAME_STARTING:
