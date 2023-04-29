@@ -5,5 +5,6 @@
 [resource]
 script = ExtResource("1_72stq")
 health = 2
+jump_height = 240.0
 time_to_max_move_speed = 0.5
 max_move_speed = 500.0

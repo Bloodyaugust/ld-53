@@ -31,7 +31,7 @@ func _jump() -> void:
     STATES.JUMPING:
       _state = STATES.DOUBLEJUMPING
 
-  _tween.tween_property(self, "position", Vector2(position.x, position.y - 80.0), 0.25)
+  _tween.tween_property(self, "position", Vector2(position.x, position.y - data.jump_height), 0.25)
 
   match _state:
     STATES.JUMPING:

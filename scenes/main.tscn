@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=21 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://chvjlwqgjsh08" path="res://sprites/player/player.png" id="1_ynb2x"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
 [ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
+[ext_resource type="Script" path="res://views/HUD.gd" id="14_q0ovd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
 animations = [{
@@ -68,10 +69,10 @@ shape = SubResource("RectangleShape2D_d80xq")
 [node name="Truck" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-1600, 120)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_al08k")
 autoplay = "default"
-frame_progress = 0.621741
+frame_progress = 0.951928
 script = ExtResource("4_po0hw")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
@@ -176,7 +177,7 @@ horizontal_alignment = 1
 [node name="Label2" type="Label" parent="UIRoot/About/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"LargeLabel"
-text = "Made by: Greyson Richey
+text = "Made by: Anne Nichols and Greyson Richey
 Made with Godot"
 
 [node name="MainMenu" type="Button" parent="UIRoot/About/PanelContainer/MarginContainer/VBoxContainer"]
@@ -209,7 +210,8 @@ theme_type_variation = &"H1"
 text = "Results"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ResultsPackages" type="Label" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LargeLabel"
 text = "Packages: 0"
@@ -218,6 +220,29 @@ text = "Packages: 0"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
+
+[node name="HUD" type="MarginContainer" parent="UIRoot"]
+visible = false
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -203.0
+offset_top = -180.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 10
+theme = ExtResource("2_1ffbx")
+script = ExtResource("14_q0ovd")
+
+[node name="HUDPackages" type="Label" parent="UIRoot/HUD"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"H1"
+text = "0 packages"
+horizontal_alignment = 1
 
 [node name="BetterCam" parent="." instance=ExtResource("5")]
 key_movement = false
