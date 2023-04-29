@@ -13,7 +13,7 @@ scale = Vector2(1, 2.09375)
 texture = ExtResource("1_umk5r")
 script = ExtResource("2_e6c8i")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["dropoff"]]
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

@@ -40,6 +40,20 @@ func _jump() -> void:
 
   _tween.tween_callback(func(): _state = STATES.RUNNING)
 
+func _on_area_2d_entered(area: Area2D) -> void:
+  if area.is_in_group("obstacle"):
+    if _tween:
+      _tween.kill()
+
+    _state = STATES.TRIPPING
+    _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+
+    _tween.tween_property(self, "global_position", Vector2(global_position.x, 0.0), 0.15)
+    _tween.tween_callback(func(): _state = STATES.RUNNING)
+
+  if area.is_in_group("dropoff"):
+    Store.set_state("packages", Store.state.packages + 1)
+
 func _on_store_state_changed(state_key: String, substate) -> void:
   match state_key:
     "game":
@@ -82,4 +96,4 @@ func _process(delta):
 
 func _ready():
   Store.state_changed.connect(_on_store_state_changed)
-  _area2D.area_entered.connect(func(_area: Area2D): Store.set_state("packages", Store.state.packages + 1))
+  _area2D.area_entered.connect(_on_area_2d_entered)
