@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=13 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://dngu6lih2xxlo" path="res://actors/Player.tscn" id="1_4pt6e"]
 [ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="2"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
+[ext_resource type="Script" path="res://actors/Player.gd" id="2_2opep"]
+[ext_resource type="Resource" uid="uid://tsqf267nyyx7" path="res://data/base_player_data.tres" id="3_o2wyl"]
 [ext_resource type="Script" path="res://views/MainMenu.gd" id="4"]
+[ext_resource type="Script" path="res://actors/Truck.gd" id="4_po0hw"]
 [ext_resource type="PackedScene" path="res://lib/BetterCam.tscn" id="5"]
 [ext_resource type="Script" path="res://views/Splash.gd" id="6"]
 [ext_resource type="Script" path="res://views/About.gd" id="7_xk6j8"]
@@ -13,8 +15,19 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_4pt6e")]
-position = Vector2(-739, -91)
+[node name="Player" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-700, 0)
+texture = ExtResource("2")
+script = ExtResource("2_2opep")
+data = ExtResource("3_o2wyl")
+
+[node name="Truck" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1600, 120)
+scale = Vector2(10.2031, 4.90625)
+texture = ExtResource("2")
+script = ExtResource("4_po0hw")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 
