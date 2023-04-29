@@ -83,7 +83,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _tween = create_tween().set_trans(Tween.TRANS_LINEAR)
           _state = STATES.RESETTING
           Store.state.move_speed = 0.0
-          _tween.tween_property(self, "position", Vector2(-700.0, 0.0), 1.0)
+          _tween.tween_property(self, "position", Vector2(-600.0, 0.0), 1.0)
           _tween.tween_callback(func():
             _state = STATES.RUNNING
 

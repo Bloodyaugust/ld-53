@@ -29,8 +29,6 @@ func set_state(state_key: String, new_state) -> void:
 func _initialize():
   set_state("game", GameConstants.GAME_OVER)
 
-  (func(): ViewController.set_client_view(ViewController.CLIENT_VIEWS.SPLASH)).call_deferred()
-
 func _ready():
   if FileAccess.file_exists(ClientConstants.CLIENT_PERSISTENT_STORE_PATH):
     persistent_store = load(ClientConstants.CLIENT_PERSISTENT_STORE_PATH)

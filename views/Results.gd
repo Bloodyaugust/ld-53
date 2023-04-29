@@ -4,7 +4,6 @@ extends Control
 @onready var _packages: Label = %ResultsPackages
 
 func _on_main_menu_button_pressed() -> void:
-  ViewController.set_client_view(ViewController.CLIENT_VIEWS.MAIN_MENU)
   Store.set_state("game", GameConstants.GAME_OVER)
 
 func _on_store_state_changed(state_key: String, substate) -> void:

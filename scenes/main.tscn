@@ -1,8 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=19 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://chvjlwqgjsh08" path="res://sprites/player/player.png" id="1_ynb2x"]
-[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="2"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
 [ext_resource type="Script" path="res://actors/Player.gd" id="2_2opep"]
 [ext_resource type="Resource" uid="uid://tsqf267nyyx7" path="res://data/base_player_data.tres" id="3_o2wyl"]
@@ -11,7 +10,6 @@
 [ext_resource type="Script" path="res://actors/Truck.gd" id="4_po0hw"]
 [ext_resource type="PackedScene" path="res://lib/BetterCam.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://bhgijg3ck2bga" path="res://sprites/truck/truck2.png" id="5_y3wc5"]
-[ext_resource type="Script" path="res://views/Splash.gd" id="6"]
 [ext_resource type="Script" path="res://views/About.gd" id="7_xk6j8"]
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
@@ -50,7 +48,7 @@ animations = [{
 
 [node name="Player" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-700, 0)
+position = Vector2(-600, 0)
 script = ExtResource("2_2opep")
 data = ExtResource("3_o2wyl")
 
@@ -61,6 +59,7 @@ autoplay = "default"
 
 [node name="PlayerArea" type="Area2D" parent="Player"]
 unique_name_in_owner = true
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerArea"]
 position = Vector2(-2.5, 0.5)
@@ -68,56 +67,45 @@ shape = SubResource("RectangleShape2D_d80xq")
 
 [node name="Truck" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1600, 120)
-scale = Vector2(0.6, 0.6)
+position = Vector2(-1500, 120)
+scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_al08k")
 autoplay = "default"
-frame_progress = 0.951928
+frame_progress = 0.310543
 script = ExtResource("4_po0hw")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 
-[node name="MainMenu" type="CenterContainer" parent="UIRoot"]
+[node name="MainMenu" type="Control" parent="UIRoot"]
 visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
 theme = ExtResource("2_1ffbx")
 script = ExtResource("4")
 
-[node name="PanelContainer" type="PanelContainer" parent="UIRoot/MainMenu"]
-custom_minimum_size = Vector2(2.08165e-12, 600)
-layout_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/MainMenu/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/MainMenu/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 1
-
-[node name="Label" type="Label" parent="UIRoot/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("2_1ffbx")
-theme_type_variation = &"H1"
-text = "Main Menu"
-
-[node name="Play" type="Button" parent="UIRoot/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="UIRoot/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 600.0
+offset_top = 400.0
+offset_right = 1012.0
+offset_bottom = 646.0
 theme_override_font_sizes/font_size = 20
 text = "Play"
 
-[node name="About" type="Button" parent="UIRoot/MainMenu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="About" type="Button" parent="UIRoot/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
+offset_left = 1470.0
+offset_top = 800.0
+offset_right = 1882.0
+offset_bottom = 1046.0
 theme_override_font_sizes/font_size = 20
 text = "About"
 
@@ -129,25 +117,6 @@ theme_override_constants/margin_top = 10
 layout_mode = 2
 text = "144 FPS"
 script = ExtResource("1")
-
-[node name="Splash" type="ColorRect" parent="UIRoot"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-script = ExtResource("6")
-
-[node name="TextureRect" type="TextureRect" parent="UIRoot/Splash"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2")
 
 [node name="About" type="CenterContainer" parent="UIRoot"]
 visible = false
