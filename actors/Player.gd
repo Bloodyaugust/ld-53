@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 enum STATES {
   RUNNING,
@@ -47,9 +47,11 @@ func _on_area_2d_entered(area: Area2D) -> void:
       _tween.kill()
 
     _health -= 1
-    
+
     if _health <= 0:
-      Store.set_state("game", GameConstants.GAME_OVER)
+      _state = STATES.RESETTING
+      Store.state.move_speed = 0.0
+      Store.set_state("game", GameConstants.GAME_ENDING)
     else:
       _state = STATES.TRIPPING
       _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
@@ -68,6 +70,12 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _health = data.health
           _state = STATES.DRIVING
           Store.state.move_speed = data.max_move_speed
+        GameConstants.GAME_RESULTS:
+          if _tween:
+            _tween.kill()
+
+          _tween = create_tween().set_trans(Tween.TRANS_LINEAR)
+          _tween.tween_property(self, "global_position", _truck.global_position, 1.0)
         GameConstants.GAME_STARTING:
           if _tween:
             _tween.kill()

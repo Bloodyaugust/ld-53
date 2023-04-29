@@ -1,42 +1,77 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=20 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://chvjlwqgjsh08" path="res://sprites/player/player.png" id="1_ynb2x"]
 [ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="2"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
 [ext_resource type="Script" path="res://actors/Player.gd" id="2_2opep"]
 [ext_resource type="Resource" uid="uid://tsqf267nyyx7" path="res://data/base_player_data.tres" id="3_o2wyl"]
 [ext_resource type="Script" path="res://views/MainMenu.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://bpmkijjlkgnri" path="res://sprites/truck/truck1.png" id="4_d7i24"]
 [ext_resource type="Script" path="res://actors/Truck.gd" id="4_po0hw"]
 [ext_resource type="PackedScene" path="res://lib/BetterCam.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://bhgijg3ck2bga" path="res://sprites/truck/truck2.png" id="5_y3wc5"]
 [ext_resource type="Script" path="res://views/Splash.gd" id="6"]
 [ext_resource type="Script" path="res://views/About.gd" id="7_xk6j8"]
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
+[ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ynb2x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d80xq"]
-size = Vector2(63, 63)
+size = Vector2(195, 301)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_al08k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_d7i24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_y3wc5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" type="Sprite2D" parent="."]
+[node name="Player" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-700, 0)
-texture = ExtResource("2")
 script = ExtResource("2_2opep")
 data = ExtResource("3_o2wyl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_opsxp")
+autoplay = "default"
 
 [node name="PlayerArea" type="Area2D" parent="Player"]
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerArea"]
-position = Vector2(0.5, 1.5)
+position = Vector2(-2.5, 0.5)
 shape = SubResource("RectangleShape2D_d80xq")
 
-[node name="Truck" type="Sprite2D" parent="."]
+[node name="Truck" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-1600, 120)
-scale = Vector2(10.2031, 4.90625)
-texture = ExtResource("2")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_al08k")
+autoplay = "default"
+frame_progress = 0.621741
 script = ExtResource("4_po0hw")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
@@ -145,6 +180,41 @@ text = "Made by: Greyson Richey
 Made with Godot"
 
 [node name="MainMenu" type="Button" parent="UIRoot/About/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Results" type="CenterContainer" parent="UIRoot"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1ffbx")
+script = ExtResource("13_pcmex")
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/Results"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/Results/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/Results/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"H1"
+text = "Results"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"LargeLabel"
+text = "Packages: 0"
+
+[node name="ResultsMainMenu" type="Button" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"

@@ -14,7 +14,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
   match state_key:
     "game":
       match substate:
-        GameConstants.GAME_OVER:
+        GameConstants.GAME_RESULTS:
           GDUtil.queue_free_children(_dropoff_points_container)
           GDUtil.queue_free_children(_obstacles_container)
 
