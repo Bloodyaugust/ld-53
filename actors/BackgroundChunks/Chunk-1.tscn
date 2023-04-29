@@ -10,3 +10,12 @@ script = ExtResource("1_4ij4h")
 position = Vector2(-6.10352e-05, -248)
 scale = Vector2(29.9375, 6.625)
 texture = ExtResource("1_ktsqr")
+
+[node name="Dropoffs" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Node2D" type="Node2D" parent="Dropoffs"]
+position = Vector2(-721, 0)
+
+[node name="Node2D2" type="Node2D" parent="Dropoffs"]
+position = Vector2(575, 0)
