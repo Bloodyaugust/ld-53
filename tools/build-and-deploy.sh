@@ -18,24 +18,24 @@ mkdir build/win/
 
 echo "EXPORTING FOR LINUX"
 echo "-----------------------------"
-godot --headless --export-debug "Linux/X11" build/linux/godot-template-4.x86_64 -v
+godot --headless --export-debug "Linux/X11" build/linux/ld-53.x86_64 -v
 # echo "EXPORTING FOR OSX"
 # echo "-----------------------------"
-# godot --export "Mac OSX" build/osx/godot-template-4.dmg -v
+# godot --export "Mac OSX" build/osx/ld-53.dmg -v
 echo "EXPORTING FOR WINDOZE"
 echo "-----------------------------"
-godot --headless --export-debug "Windows Desktop" build/win/godot-template-4.exe -v
+godot --headless --export-debug "Windows Desktop" build/win/ld-53.exe -v
 echo "-----------------------------"
 
 # echo "CHANGING FILETYPE AND CHMOD EXECUTABLE FOR OSX"
 # echo "-----------------------------"
 # cd build/osx/
-# mv godot-template-4.dmg godot-template-4-osx-alpha.zip
-# unzip godot-template-4-osx-alpha.zip
-# rm godot-template-4-osx-alpha.zip
-# chmod +x godot-template-4.app/Contents/MacOS/godot-template-4
-# zip -r godot-template-4-osx-alpha.zip godot-template-4.app
-# rm -rf godot-template-4.app
+# mv ld-53.dmg ld-53-osx-alpha.zip
+# unzip ld-53-osx-alpha.zip
+# rm ld-53-osx-alpha.zip
+# chmod +x ld-53.app/Contents/MacOS/ld-53
+# zip -r ld-53-osx-alpha.zip ld-53.app
+# rm -rf ld-53.app
 # cd ../../
 
 ls -al
@@ -47,15 +47,15 @@ ls -al build/win/
 echo "ZIPPING FOR WINDOZE"
 echo "-----------------------------"
 cd build/win/
-zip -r godot-template-4-win-alpha.zip godot-template-4.exe godot-template-4.pck
-rm -r godot-template-4.exe godot-template-4.pck
+zip -r ld-53-win-alpha.zip ld-53.exe ld-53.pck
+rm -r ld-53.exe ld-53.pck
 cd ../../
 
 echo "ZIPPING FOR LINUX"
 echo "-----------------------------"
 cd build/linux/
-zip -r godot-template-4-linux-alpha.zip godot-template-4.x86_64 godot-template-4.pck
-rm -r godot-template-4.x86_64 godot-template-4.pck
+zip -r ld-53-linux-alpha.zip ld-53.x86_64 ld-53.pck
+rm -r ld-53.x86_64 ld-53.pck
 cd ../../
 
 echo "Logging in to Butler"
