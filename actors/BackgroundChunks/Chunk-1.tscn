@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkebah7fnyvlo"]
+
+[ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_4ij4h"]
+[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="1_ktsqr"]
+
+[node name="BackgroundChunk" type="Node2D"]
+script = ExtResource("1_4ij4h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-6.10352e-05, -248)
+scale = Vector2(29.9375, 6.625)
+texture = ExtResource("1_ktsqr")
