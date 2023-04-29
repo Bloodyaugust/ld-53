@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=14 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="2"]
@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d80xq"]
+size = Vector2(63, 63)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="Sprite2D" parent="."]
@@ -21,6 +24,13 @@ position = Vector2(-700, 0)
 texture = ExtResource("2")
 script = ExtResource("2_2opep")
 data = ExtResource("3_o2wyl")
+
+[node name="PlayerArea" type="Area2D" parent="Player"]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerArea"]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_d80xq")
 
 [node name="Truck" type="Sprite2D" parent="."]
 unique_name_in_owner = true

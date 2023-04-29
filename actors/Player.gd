@@ -11,6 +11,7 @@ enum STATES {
 
 @export var data: PlayerData
 
+@onready var _area2D: Area2D = %PlayerArea
 @onready var _truck: Node2D = %Truck
 
 var _state: STATES = STATES.RUNNING
@@ -56,7 +57,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _tween.tween_property(self, "position", Vector2(-700.0, 0.0), 1.0)
           _tween.tween_callback(func():
             _state = STATES.RUNNING
-            
+
             Store.set_state("game", GameConstants.GAME_IN_PROGRESS)
           )
 
@@ -81,3 +82,4 @@ func _process(delta):
 
 func _ready():
   Store.state_changed.connect(_on_store_state_changed)
+  _area2D.area_entered.connect(func(_area: Area2D): Store.set_state("packages", Store.state.packages + 1))

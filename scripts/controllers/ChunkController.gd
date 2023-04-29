@@ -11,21 +11,19 @@ var _background_chunk_scenes: Array
 func _process(delta):
   var _chunks = _background_chunks_container.get_children()
 
-  _chunks.sort_custom(func(a, b): return a.position.x > b.position.x)
+  _chunks.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)
 
   for _chunk in _chunks:
-    if _chunk.position.x <= -1920.0:
-      print("deleting chunk")
+    if _chunk.global_position.x <= -1920.0:
       _chunk.queue_free()
 
   if _chunks.size() < CHUNKS_GENERATED:
-    print("adding chunk")
     var _new_chunk = _background_chunk_scenes[0].instantiate()
 
-    _new_chunk.position = Vector2(_chunks[_chunks.size() - 1].position.x + 1920.0, 0.0)
+    _new_chunk.global_position = Vector2(_chunks[_chunks.size() - 1].global_position.x + 1920.0, 0.0)
     _background_chunks_container.add_child(_new_chunk)
 
-    if Store.state.game == GameConstants.GAME_IN_PROGRESS:
+    if Store.state.game == GameConstants.GAME_IN_PROGRESS && _dropoff_points_container.get_child_count() < 1:
       var _potential_dropoffs = _new_chunk.get_dropoff_points()
       var _selected_dropoff: Node2D = _potential_dropoffs[randi() % _potential_dropoffs.size()]
       var _new_dropoff_point: Node2D = DROPOFF_POINT_SCENE.instantiate()

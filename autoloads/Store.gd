@@ -9,11 +9,13 @@ var state: Dictionary = {
   "client_view": ViewController.CLIENT_VIEWS.NONE,
   "game": "",
   "move_speed": 0.0,
+  "packages": 0,
  }
 
 func start_game() -> void:
   ViewController.set_client_view(ViewController.CLIENT_VIEWS.NONE)
   set_state("game", GameConstants.GAME_STARTING)
+  set_state("packages", 0)
 
 func save_persistent_store() -> void:
   if ResourceSaver.save(persistent_store, ClientConstants.CLIENT_PERSISTENT_STORE_PATH) != OK:

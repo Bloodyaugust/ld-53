@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2rkn3jrong4f"]
+[gd_scene load_steps=4 format=3 uid="uid://b2rkn3jrong4f"]
 
 [ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="1_umk5r"]
 [ext_resource type="Script" path="res://actors/DropoffPoint.gd" id="2_e6c8i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75lie"]
+size = Vector2(64, 169.075)
 
 [node name="DropoffPoint" type="Sprite2D"]
 modulate = Color(1, 1, 0.0980392, 1)
@@ -9,3 +12,10 @@ position = Vector2(0, -35)
 scale = Vector2(1, 2.09375)
 texture = ExtResource("1_umk5r")
 script = ExtResource("2_e6c8i")
+
+[node name="Area2D" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, -52.0597)
+shape = SubResource("RectangleShape2D_75lie")
