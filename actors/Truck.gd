@@ -25,6 +25,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _tween = create_tween().set_trans(Tween.TRANS_LINEAR)
           if abs(global_position.x) > 0.1:
             _tween.tween_property(self, "global_position", Vector2(0.0, global_position.y), 1.0)
+            _tween.tween_property(self, "global_position", Vector2(0.0, global_position.y), 2.0)
           _tween.tween_callback(func(): ViewController.set_client_view(ViewController.CLIENT_VIEWS.MAIN_MENU))
           play()
 
