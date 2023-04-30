@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=29 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -18,11 +18,13 @@
 [ext_resource type="Texture2D" uid="uid://c120vgsoqip7u" path="res://sprites/player/man6.png" id="8_651np"]
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
+[ext_resource type="Texture2D" uid="uid://b2w5uctwiphuj" path="res://sprites/truck/title.png" id="12_hatlg"]
 [ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
 [ext_resource type="Texture2D" uid="uid://d0bmp56nfrgcv" path="res://sprites/buttons/playbutton1.png" id="14_f2ex7"]
 [ext_resource type="Script" path="res://views/HUD.gd" id="14_q0ovd"]
 [ext_resource type="Texture2D" uid="uid://h5rl4l7asebq" path="res://sprites/buttons/playbutton2.png" id="15_ok0r8"]
 [ext_resource type="Texture2D" uid="uid://2ii8tldibe8m" path="res://sprites/buttons/about.png" id="16_bo7md"]
+[ext_resource type="PackedScene" uid="uid://6u7x7610b7w6" path="res://views/components/Heart.tscn" id="21_11etq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
 animations = [{
@@ -99,6 +101,11 @@ sprite_frames = SubResource("SpriteFrames_al08k")
 autoplay = "default"
 frame_progress = 0.310543
 script = ExtResource("4_po0hw")
+
+[node name="Title" type="Sprite2D" parent="Truck"]
+position = Vector2(-198.75, -175)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("12_hatlg")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 
@@ -226,16 +233,35 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -203.0
-offset_top = -180.0
+offset_left = -332.0
+offset_top = -83.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 10
 theme = ExtResource("2_1ffbx")
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 script = ExtResource("14_q0ovd")
 
-[node name="HUDPackages" type="Label" parent="UIRoot/HUD"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/HUD"]
+layout_mode = 2
+
+[node name="HUDHearts" type="HBoxContainer" parent="UIRoot/HUD/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="Heart" parent="UIRoot/HUD/VBoxContainer/HUDHearts" instance=ExtResource("21_11etq")]
+layout_mode = 2
+
+[node name="Heart2" parent="UIRoot/HUD/VBoxContainer/HUDHearts" instance=ExtResource("21_11etq")]
+layout_mode = 2
+
+[node name="Heart3" parent="UIRoot/HUD/VBoxContainer/HUDHearts" instance=ExtResource("21_11etq")]
+layout_mode = 2
+
+[node name="HUDPackages" type="Label" parent="UIRoot/HUD/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"H1"

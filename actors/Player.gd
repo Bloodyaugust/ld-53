@@ -9,6 +9,8 @@ enum STATES {
   RESETTING,
 }
 
+signal damaged
+
 @export var data: PlayerData
 
 @onready var _area2D: Area2D = %PlayerArea
@@ -54,6 +56,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
       _tween.kill()
 
     _health -= 1
+    emit_signal("damaged")
 
     if _health <= 0:
       _state = STATES.RESETTING
