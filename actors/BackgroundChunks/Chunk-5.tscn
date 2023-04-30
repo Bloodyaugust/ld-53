@@ -11,4 +11,4 @@ script = ExtResource("1_ve04h")
 texture = ExtResource("2_jy7qi")
 
 [node name="DropoffPoint" parent="." instance=ExtResource("3_dgvfe")]
-position = Vector2(-508, -1)
+position = Vector2(-496, -58)

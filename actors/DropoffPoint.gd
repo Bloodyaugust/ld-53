@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 
 @onready var _area2d: Area2D = %Area2D
 

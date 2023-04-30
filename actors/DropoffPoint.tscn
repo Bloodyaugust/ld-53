@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2rkn3jrong4f"]
 
-[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="1_umk5r"]
 [ext_resource type="Script" path="res://actors/DropoffPoint.gd" id="2_e6c8i"]
+[ext_resource type="Texture2D" uid="uid://br6s1j1va8ggl" path="res://sprites/mailbox.png" id="2_ul7pd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75lie"]
 size = Vector2(64, 169.075)
 
-[node name="DropoffPoint" type="Sprite2D"]
+[node name="DropoffPoint" type="Node2D"]
 modulate = Color(1, 1, 0.0980392, 1)
-position = Vector2(0, -35)
-scale = Vector2(1, 2.09375)
-texture = ExtResource("1_umk5r")
 script = ExtResource("2_e6c8i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_ul7pd")
 
 [node name="Area2D" type="Area2D" parent="." groups=["dropoff"]]
 unique_name_in_owner = true

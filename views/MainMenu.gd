@@ -1,7 +1,7 @@
 extends Control
 
 @onready var _about_button: Button = %About
-@onready var _play_button: Button = %Play
+@onready var _play_button: TextureButton = %Play
 
 func _on_about_button_pressed() -> void:
   ViewController.set_client_view(ViewController.CLIENT_VIEWS.ABOUT)

@@ -12,8 +12,8 @@ script = ExtResource("1_k7w6e")
 texture = ExtResource("2_ea17x")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(532, -212)
+position = Vector2(542, -273)
 texture = ExtResource("3_4f2va")
 
 [node name="DropoffPoint" parent="." instance=ExtResource("4_5guor")]
-position = Vector2(533, -2)
+position = Vector2(543, -63)

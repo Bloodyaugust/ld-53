@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=26 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -19,7 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
 [ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
+[ext_resource type="Texture2D" uid="uid://d0bmp56nfrgcv" path="res://sprites/buttons/playbutton1.png" id="14_f2ex7"]
 [ext_resource type="Script" path="res://views/HUD.gd" id="14_q0ovd"]
+[ext_resource type="Texture2D" uid="uid://h5rl4l7asebq" path="res://sprites/buttons/playbutton2.png" id="15_ok0r8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
 animations = [{
@@ -112,15 +114,18 @@ size_flags_vertical = 6
 theme = ExtResource("2_1ffbx")
 script = ExtResource("4")
 
-[node name="Play" type="Button" parent="UIRoot/MainMenu"]
+[node name="Play" type="TextureButton" parent="UIRoot/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = 600.0
 offset_top = 400.0
 offset_right = 1012.0
 offset_bottom = 646.0
-theme_override_font_sizes/font_size = 20
-text = "Play"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("14_f2ex7")
+texture_pressed = ExtResource("15_ok0r8")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="About" type="Button" parent="UIRoot/MainMenu"]
 unique_name_in_owner = true

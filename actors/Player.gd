@@ -80,6 +80,8 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _health = data.health
           _state = STATES.DRIVING
           Store.state.move_speed = data.max_move_speed
+          _area2D.monitorable = false
+          _area2D.monitoring = false
         GameConstants.GAME_RESULTS:
           if _tween:
             _tween.kill()
@@ -90,6 +92,8 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           if _tween:
             _tween.kill()
 
+          _area2D.monitorable = true
+          _area2D.monitoring = true
           _tween = create_tween().set_trans(Tween.TRANS_LINEAR)
           _state = STATES.RESETTING
           Store.state.move_speed = 0.0
