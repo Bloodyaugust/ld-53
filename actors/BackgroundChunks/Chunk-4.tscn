@@ -8,6 +8,7 @@
 script = ExtResource("1_sxn3a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("2_hgcxq")
 
 [node name="Obstacle" parent="." instance=ExtResource("3_jj61b")]

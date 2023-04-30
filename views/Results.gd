@@ -1,6 +1,6 @@
 extends Control
 
-@onready var _main_menu_button: Button = %ResultsMainMenu
+@onready var _main_menu_button: TextureButton = %ResultsMainMenu
 @onready var _packages: Label = %ResultsPackages
 
 func _on_main_menu_button_pressed() -> void:
@@ -9,7 +9,7 @@ func _on_main_menu_button_pressed() -> void:
 func _on_store_state_changed(state_key: String, substate) -> void:
   match state_key:
     "packages":
-      _packages.text = "Packages: %s" % substate
+      _packages.text = "%s" % substate
 
 func _ready():
   Store.state_changed.connect(_on_store_state_changed)

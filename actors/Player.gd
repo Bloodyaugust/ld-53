@@ -11,10 +11,15 @@ enum STATES {
 
 signal damaged
 
+const TRIP_EFFECT_SCENE: PackedScene = preload("res://actors/TripEffect.tscn")
+
 @export var data: PlayerData
 
 @onready var _area2D: Area2D = %PlayerArea
 @onready var _health: int = data.health
+@onready var _shadow: Sprite2D = %PlayerShadow
+@onready var _shadow_baseline: Vector2 = _shadow.global_position
+@onready var _shadow_baseline_scale: Vector2 = _shadow.scale
 @onready var _sprite: AnimatedSprite2D = %PlayerSprite
 @onready var _truck: Node2D = %Truck
 
@@ -54,6 +59,10 @@ func _on_area_2d_entered(area: Area2D) -> void:
   if area.is_in_group("obstacle"):
     if _tween:
       _tween.kill()
+
+    var _new_trip_effect: Node2D = TRIP_EFFECT_SCENE.instantiate()
+    get_tree().get_root().add_child(_new_trip_effect)
+    _new_trip_effect.global_position = _sprite.global_position
 
     _health -= 1
     emit_signal("damaged")
@@ -117,12 +126,17 @@ func _process(delta):
   match _state:
     STATES.RUNNING, STATES.JUMPING, STATES.DOUBLEJUMPING:
       _time_running = clampf(_time_running + delta, 0.0, data.time_to_max_move_speed)
+      _shadow.global_position = Vector2(global_position.x, _shadow_baseline.y)
+      _shadow.scale = _shadow_baseline_scale - (_shadow_baseline_scale * abs(global_position.y / 600))
       Store.state.move_speed = data.max_move_speed * (_time_running / data.time_to_max_move_speed)
     STATES.TRIPPING:
       _time_running = 0.0
       Store.state.move_speed = 0.0
     STATES.DRIVING:
       position = _truck.position
+      _shadow.global_position = Vector2(global_position.x, global_position.y + 160.0)
+    STATES.RESETTING:
+      _shadow.global_position = Vector2(global_position.x, global_position.y + 160.0)      
 
   match _state:
     STATES.RUNNING:

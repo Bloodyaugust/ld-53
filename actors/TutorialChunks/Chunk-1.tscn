@@ -24,6 +24,7 @@ animations = [{
 script = ExtResource("1_60qlv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("2_hy6tv")
 
 [node name="Obstacle" parent="." instance=ExtResource("3_7mbsc")]
@@ -34,4 +35,4 @@ position = Vector2(-89, -1)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_mlbht")
 autoplay = "default"
-frame_progress = 0.250596
+frame_progress = 0.31449

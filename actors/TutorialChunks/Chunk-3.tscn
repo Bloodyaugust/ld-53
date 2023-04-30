@@ -24,6 +24,7 @@ animations = [{
 script = ExtResource("1_k7w6e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
 texture = ExtResource("2_ea17x")
 
 [node name="DropoffPoint" parent="." instance=ExtResource("4_5guor")]

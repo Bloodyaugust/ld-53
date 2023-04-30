@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=38 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -17,15 +17,21 @@
 [ext_resource type="Script" path="res://views/About.gd" id="7_xk6j8"]
 [ext_resource type="Texture2D" uid="uid://c120vgsoqip7u" path="res://sprites/player/man6.png" id="8_651np"]
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
+[ext_resource type="Texture2D" uid="uid://tqrm24aqlhhf" path="res://sprites/player/player_shadow.png" id="9_ejika"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
 [ext_resource type="Texture2D" uid="uid://b2w5uctwiphuj" path="res://sprites/truck/title.png" id="12_hatlg"]
 [ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
+[ext_resource type="Texture2D" uid="uid://pxv48m0yox7y" path="res://sprites/smoke.png" id="14_36ilv"]
 [ext_resource type="Texture2D" uid="uid://d0bmp56nfrgcv" path="res://sprites/buttons/playbutton1.png" id="14_f2ex7"]
 [ext_resource type="Script" path="res://views/HUD.gd" id="14_q0ovd"]
 [ext_resource type="Texture2D" uid="uid://h5rl4l7asebq" path="res://sprites/buttons/playbutton2.png" id="15_ok0r8"]
 [ext_resource type="Texture2D" uid="uid://2ii8tldibe8m" path="res://sprites/buttons/about.png" id="16_bo7md"]
+[ext_resource type="Texture2D" uid="uid://doftu26upxvt7" path="res://sprites/buttons/sound1.png" id="19_f3oqv"]
 [ext_resource type="PackedScene" uid="uid://6u7x7610b7w6" path="res://views/components/Heart.tscn" id="21_11etq"]
+[ext_resource type="Texture2D" uid="uid://bebeurdq17kv4" path="res://sprites/buttons/gameover.png" id="21_l2cgg"]
+[ext_resource type="Texture2D" uid="uid://jphsjrcbsy2f" path="res://sprites/buttons/menubutton1.png" id="23_bb003"]
 [ext_resource type="Texture2D" uid="uid://48ieny0rfsml" path="res://sprites/buttons/package.png" id="23_vndkb"]
+[ext_resource type="Texture2D" uid="uid://jasv0xkkitpo" path="res://sprites/buttons/menubutton2.png" id="24_rtdnq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
 animations = [{
@@ -70,6 +76,14 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Curve" id="Curve_etq1d"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.180055, 1), 0.0, 0.0, 0, 0, Vector2(0.750692, 0.690909), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.683712, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_3f1vw"]
+offsets = PackedFloat32Array(0, 0.230303, 0.733333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.92549, 1, 1, 1, 0.72549, 1, 1, 1, 0)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="Node2D" parent="."]
@@ -94,6 +108,13 @@ visible = false
 position = Vector2(-2.5, 0.5)
 shape = SubResource("RectangleShape2D_d80xq")
 
+[node name="PlayerShadow" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = -2
+position = Vector2(-600, 161)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("9_ejika")
+
 [node name="Truck" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-1500, 120)
@@ -107,6 +128,23 @@ script = ExtResource("4_po0hw")
 position = Vector2(-198.75, -175)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("12_hatlg")
+
+[node name="TruckExhaust" type="CPUParticles2D" parent="Truck"]
+unique_name_in_owner = true
+position = Vector2(-582.5, 318.75)
+texture = ExtResource("14_36ilv")
+direction = Vector2(-1, 0)
+gravity = Vector2(0, -980)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+angular_velocity_min = -60.0
+angular_velocity_max = 60.0
+angle_min = -360.0
+angle_max = 360.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3
+scale_amount_curve = SubResource("Curve_etq1d")
+color_ramp = SubResource("Gradient_3f1vw")
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 
@@ -145,6 +183,18 @@ offset_bottom = 884.0
 texture = ExtResource("16_bo7md")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="SoundToggle" type="TextureButton" parent="UIRoot/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1223.0
+offset_top = 578.0
+offset_right = 1313.0
+offset_bottom = 668.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("19_f3oqv")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="FPS" type="MarginContainer" parent="UIRoot"]
 theme_override_constants/margin_left = 10
@@ -191,8 +241,9 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Main Menu"
 
-[node name="Results" type="CenterContainer" parent="UIRoot"]
+[node name="Results" type="Control" parent="UIRoot"]
 visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -201,31 +252,54 @@ grow_vertical = 2
 theme = ExtResource("2_1ffbx")
 script = ExtResource("13_pcmex")
 
-[node name="PanelContainer" type="PanelContainer" parent="UIRoot/Results"]
-layout_mode = 2
+[node name="TextureRect" type="TextureRect" parent="UIRoot/Results"]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 400.0
+offset_right = 1012.0
+offset_bottom = 640.0
+texture = ExtResource("21_l2cgg")
+expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/Results/PanelContainer"]
+[node name="ResultsMainMenu" type="TextureButton" parent="UIRoot/Results"]
+unique_name_in_owner = true
 layout_mode = 2
+offset_left = 820.0
+offset_top = 658.0
+offset_right = 1045.0
+offset_bottom = 838.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("23_bb003")
+texture_pressed = ExtResource("24_rtdnq")
+ignore_texture_size = true
+stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/Results/PanelContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/Results"]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 511.0
+offset_right = 930.0
+offset_bottom = 636.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot/Results/HBoxContainer"]
+custom_minimum_size = Vector2(125, 125)
 layout_mode = 2
+texture = ExtResource("23_vndkb")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Label" type="Label" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"H1"
-text = "Results"
-horizontal_alignment = 1
-
-[node name="ResultsPackages" type="Label" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ResultsPackages" type="Label" parent="UIRoot/Results/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"LargeLabel"
-text = "Packages: 0"
-
-[node name="ResultsMainMenu" type="Button" parent="UIRoot/Results/PanelContainer/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Main Menu"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.298039, 0.643137, 0.67451, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/font_size = 60
+text = "100"
 
 [node name="HUD" type="MarginContainer" parent="UIRoot"]
 visible = false
@@ -270,6 +344,11 @@ alignment = 2
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"H1"
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.298039, 0.643137, 0.67451, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 6
 text = "0"
 horizontal_alignment = 1
 
