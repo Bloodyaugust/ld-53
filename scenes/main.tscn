@@ -247,11 +247,5 @@ z_index = -2
 
 [node name="BackgroundChunk" parent="BackgroundChunks" instance=ExtResource("9_7rlw0")]
 
-[node name="DropoffPoints" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Obstacles" type="Node2D" parent="."]
-unique_name_in_owner = true
-
 [node name="ChunkController" type="Node2D" parent="."]
 script = ExtResource("10_4x66y")

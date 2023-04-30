@@ -8,12 +8,3 @@ script = ExtResource("1_4ij4h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_eyhje")
-
-[node name="Dropoffs" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Node2D" type="Node2D" parent="Dropoffs"]
-position = Vector2(-721, 0)
-
-[node name="Node2D2" type="Node2D" parent="Dropoffs"]
-position = Vector2(575, 0)

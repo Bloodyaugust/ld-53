@@ -10,6 +10,7 @@ var state: Dictionary = {
   "game": "",
   "move_speed": 0.0,
   "packages": 0,
+  "tutorial_completed": 0,
  }
 
 func start_game() -> void:

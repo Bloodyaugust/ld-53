@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnhcusftdvyau"]
+
+[ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_60qlv"]
+[ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_hy6tv"]
+[ext_resource type="PackedScene" uid="uid://d1ofs7std6p1f" path="res://actors/Obstacles/Ball.tscn" id="3_7mbsc"]
+[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="4_by6qu"]
+
+[node name="BackgroundChunk" type="Node2D"]
+script = ExtResource("1_60qlv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_hy6tv")
+
+[node name="Obstacle" parent="." instance=ExtResource("3_7mbsc")]
+position = Vector2(150, 150)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-89, -1)
+texture = ExtResource("4_by6qu")
