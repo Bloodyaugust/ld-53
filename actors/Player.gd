@@ -13,6 +13,7 @@ enum STATES {
 
 @onready var _area2D: Area2D = %PlayerArea
 @onready var _health: int = data.health
+@onready var _sprite: AnimatedSprite2D = %PlayerSprite
 @onready var _truck: Node2D = %Truck
 
 var _state: STATES = STATES.RUNNING
@@ -23,6 +24,7 @@ func _jump() -> void:
   if _tween:
     _tween.kill()
 
+  _sprite.pause()
   _tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
   match _state:
@@ -40,7 +42,10 @@ func _jump() -> void:
     STATES.DOUBLEJUMPING:
       _tween.tween_property(self, "position", Vector2(position.x, 0), data.jump_time_to_fall * 2)
 
-  _tween.tween_callback(func(): _state = STATES.RUNNING)
+  _tween.tween_callback(func():
+    _state = STATES.RUNNING
+    _sprite.play("default")
+  )
 
 func _on_area_2d_entered(area: Area2D) -> void:
   if area.is_in_group("obstacle"):
@@ -54,11 +59,15 @@ func _on_area_2d_entered(area: Area2D) -> void:
       Store.state.move_speed = 0.0
       Store.set_state("game", GameConstants.GAME_ENDING)
     else:
+      _sprite.pause()
       _state = STATES.TRIPPING
       _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 
       _tween.tween_property(self, "global_position", Vector2(global_position.x, 0.0), 0.15)
-      _tween.tween_callback(func(): _state = STATES.RUNNING)
+      _tween.tween_callback(func():
+        _state = STATES.RUNNING
+        _sprite.play("default")
+      )
 
   if area.is_in_group("dropoff"):
     Store.set_state("packages", Store.state.packages + 1)
@@ -87,6 +96,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _tween.tween_property(self, "position", Vector2(-600.0, 0.0), 1.0)
           _tween.tween_callback(func():
             _state = STATES.RUNNING
+            _sprite.play("default")
 
             Store.set_state("game", GameConstants.GAME_IN_PROGRESS)
           )
@@ -104,6 +114,8 @@ func _process(delta):
 
   match _state:
     STATES.RUNNING:
+      _sprite.speed_scale = Store.state.move_speed / data.max_move_speed
+
       if Input.is_action_just_pressed("move_up"):
         _jump()
     STATES.JUMPING:

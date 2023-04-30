@@ -1,16 +1,21 @@
-[gd_scene load_steps=19 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=24 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://chvjlwqgjsh08" path="res://sprites/player/player.png" id="1_ynb2x"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
 [ext_resource type="Script" path="res://actors/Player.gd" id="2_2opep"]
+[ext_resource type="Texture2D" uid="uid://m1ydtfvcivan" path="res://sprites/player/man1.png" id="3_ke3ru"]
 [ext_resource type="Resource" uid="uid://tsqf267nyyx7" path="res://data/base_player_data.tres" id="3_o2wyl"]
 [ext_resource type="Script" path="res://views/MainMenu.gd" id="4"]
+[ext_resource type="Texture2D" uid="uid://di3bdtj4s4q3a" path="res://sprites/player/man2.png" id="4_b4grh"]
 [ext_resource type="Texture2D" uid="uid://bpmkijjlkgnri" path="res://sprites/truck/truck1.png" id="4_d7i24"]
 [ext_resource type="Script" path="res://actors/Truck.gd" id="4_po0hw"]
 [ext_resource type="PackedScene" path="res://lib/BetterCam.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://crcwxrlvujk6w" path="res://sprites/player/man3.png" id="5_ag63u"]
 [ext_resource type="Texture2D" uid="uid://bhgijg3ck2bga" path="res://sprites/truck/truck2.png" id="5_y3wc5"]
+[ext_resource type="Texture2D" uid="uid://dymlkxaakksjn" path="res://sprites/player/man4.png" id="6_k6x3b"]
+[ext_resource type="Texture2D" uid="uid://de18d8gtcub5l" path="res://sprites/player/man5.png" id="7_3qepf"]
 [ext_resource type="Script" path="res://views/About.gd" id="7_xk6j8"]
+[ext_resource type="Texture2D" uid="uid://c120vgsoqip7u" path="res://sprites/player/man6.png" id="8_651np"]
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
 [ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
@@ -20,11 +25,26 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ynb2x")
+"texture": ExtResource("3_ke3ru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b4grh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ag63u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_k6x3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3qepf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_651np")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d80xq"]
@@ -52,10 +72,13 @@ position = Vector2(-600, 0)
 script = ExtResource("2_2opep")
 data = ExtResource("3_o2wyl")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="Player"]
+unique_name_in_owner = true
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_opsxp")
 autoplay = "default"
+frame = 2
+frame_progress = 0.996353
 
 [node name="PlayerArea" type="Area2D" parent="Player"]
 unique_name_in_owner = true
