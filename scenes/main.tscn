@@ -127,16 +127,6 @@ texture_pressed = ExtResource("15_ok0r8")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="About" type="Button" parent="UIRoot/MainMenu"]
-unique_name_in_owner = true
-layout_mode = 2
-offset_left = 1470.0
-offset_top = 800.0
-offset_right = 1882.0
-offset_bottom = 1046.0
-theme_override_font_sizes/font_size = 20
-text = "About"
-
 [node name="FPS" type="MarginContainer" parent="UIRoot"]
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10

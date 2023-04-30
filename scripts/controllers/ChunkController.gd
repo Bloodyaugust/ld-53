@@ -7,10 +7,10 @@ const CHUNKS_GENERATED: int = 3
 var _background_chunk_scenes: Array
 var _tutorial_chunk_scenes: Array
 
-func _on_store_state_changed(state_key: String, substate) -> void:
+func _on_store_state_changed(_state_key: String, _substate) -> void:
   pass
 
-func _process(delta):
+func _process(_delta):
   var _chunks = _background_chunks_container.get_children()
 
   _chunks.sort_custom(func(a, b): return a.global_position.x < b.global_position.x)

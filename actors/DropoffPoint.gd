@@ -1,6 +1,10 @@
 extends Node2D
 
-@onready var _area2d: Area2D = %Area2D
+var _delivered: bool = false
 
-func _ready():
-  _area2d.area_entered.connect(func(_area: Area2D): queue_free())
+func deliver() -> bool:
+  if _delivered:
+    return false
+
+  _delivered = true
+  return true

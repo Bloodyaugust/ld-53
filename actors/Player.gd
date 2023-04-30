@@ -16,6 +16,7 @@ enum STATES {
 @onready var _sprite: AnimatedSprite2D = %PlayerSprite
 @onready var _truck: Node2D = %Truck
 
+var _mailbox: Node2D
 var _state: STATES = STATES.RUNNING
 var _time_running: float = 0.0
 var _tween: Tween
@@ -70,7 +71,11 @@ func _on_area_2d_entered(area: Area2D) -> void:
       )
 
   if area.is_in_group("dropoff"):
-    Store.set_state("packages", Store.state.packages + 1)
+    _mailbox = area.get_parent()
+
+func _on_area_2d_exited(area: Area2D) -> void:
+  if area.is_in_group("dropoff"):
+    _mailbox = null
 
 func _on_store_state_changed(state_key: String, substate) -> void:
   match state_key:
@@ -122,6 +127,11 @@ func _process(delta):
 
       if Input.is_action_just_pressed("move_up"):
         _jump()
+
+      if GDUtil.reference_safe(_mailbox) && Input.is_action_just_pressed("move_down"):
+        if _mailbox.deliver():
+          Store.set_state("packages", Store.state.packages + 1)
+
     STATES.JUMPING:
       if Input.is_action_just_pressed("move_up") && _tween.get_total_elapsed_time() > data.jump_time_to_apex - (data.jump_time_to_double_after_apex / 2) && _tween.get_total_elapsed_time() < data.jump_time_to_apex + (data.jump_time_to_double_after_apex / 2):
         _jump()
@@ -129,3 +139,4 @@ func _process(delta):
 func _ready():
   Store.state_changed.connect(_on_store_state_changed)
   _area2D.area_entered.connect(_on_area_2d_entered)
+  _area2D.area_exited.connect(_on_area_2d_exited)
