@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=30 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://h5rl4l7asebq" path="res://sprites/buttons/playbutton2.png" id="15_ok0r8"]
 [ext_resource type="Texture2D" uid="uid://2ii8tldibe8m" path="res://sprites/buttons/about.png" id="16_bo7md"]
 [ext_resource type="PackedScene" uid="uid://6u7x7610b7w6" path="res://views/components/Heart.tscn" id="21_11etq"]
+[ext_resource type="Texture2D" uid="uid://48ieny0rfsml" path="res://sprites/buttons/package.png" id="23_vndkb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
 animations = [{
@@ -261,12 +262,23 @@ layout_mode = 2
 [node name="Heart3" parent="UIRoot/HUD/VBoxContainer/HUDHearts" instance=ExtResource("21_11etq")]
 layout_mode = 2
 
-[node name="HUDPackages" type="Label" parent="UIRoot/HUD/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/HUD/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="HUDPackages" type="Label" parent="UIRoot/HUD/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_type_variation = &"H1"
-text = "0 packages"
+text = "0"
 horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot/HUD/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("23_vndkb")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="BetterCam" parent="." instance=ExtResource("5")]
 key_movement = false

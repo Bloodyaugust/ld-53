@@ -14,10 +14,7 @@ func _on_player_damaged() -> void:
 func _on_state_changed(state_key: String, substate):
   match state_key:
     "packages":
-      if substate == 1:
-        _packages.text = "%s package" % substate
-      else:
-        _packages.text = "%s packages" % substate        
+      _packages.text = "%s" % substate  
     "game":
       match substate:
         GameConstants.GAME_IN_PROGRESS:

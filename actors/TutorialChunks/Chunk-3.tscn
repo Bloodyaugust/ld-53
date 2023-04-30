@@ -1,9 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjlftrxarlo4e"]
+[gd_scene load_steps=7 format=3 uid="uid://bjlftrxarlo4e"]
 
 [ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_k7w6e"]
 [ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_ea17x"]
-[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="3_4f2va"]
 [ext_resource type="PackedScene" uid="uid://b2rkn3jrong4f" path="res://actors/DropoffPoint.tscn" id="4_5guor"]
+[ext_resource type="Texture2D" uid="uid://bug2n6ye5xm25" path="res://sprites/buttons/down1.png" id="4_nqq8j"]
+[ext_resource type="Texture2D" uid="uid://0nv1c1are5h0" path="res://sprites/buttons/down2.png" id="5_sf5k3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j0xjq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_nqq8j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sf5k3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="BackgroundChunk" type="Node2D"]
 script = ExtResource("1_k7w6e")
@@ -11,9 +26,12 @@ script = ExtResource("1_k7w6e")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_ea17x")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(542, -273)
-texture = ExtResource("3_4f2va")
-
 [node name="DropoffPoint" parent="." instance=ExtResource("4_5guor")]
 position = Vector2(543, -63)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(541, -271)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_j0xjq")
+autoplay = "default"
+frame_progress = 0.56214

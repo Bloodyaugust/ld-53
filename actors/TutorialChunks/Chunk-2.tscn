@@ -1,9 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://tlk13ktn3ypx"]
+[gd_scene load_steps=7 format=3 uid="uid://tlk13ktn3ypx"]
 
 [ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_f7l54"]
 [ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_6icpu"]
+[ext_resource type="Texture2D" uid="uid://duh6h2f5necwy" path="res://sprites/buttons/up1.png" id="4_6cbxy"]
 [ext_resource type="PackedScene" uid="uid://bdu4rq6w268cu" path="res://actors/Obstacles/Dog.tscn" id="4_6jair"]
-[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="4_hbpnj"]
+[ext_resource type="Texture2D" uid="uid://cmmc3txx8arpv" path="res://sprites/buttons/up2.png" id="5_5gjag"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cwd6d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_6cbxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5gjag")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="BackgroundChunk" type="Node2D"]
 script = ExtResource("1_f7l54")
@@ -11,13 +26,17 @@ script = ExtResource("1_f7l54")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_6icpu")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(-244, -1)
-texture = ExtResource("4_hbpnj")
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(-144, -244)
-texture = ExtResource("4_hbpnj")
-
 [node name="Obstacle" parent="." instance=ExtResource("4_6jair")]
 position = Vector2(177, 79)
+
+[node name="Sprite2D4" type="AnimatedSprite2D" parent="."]
+position = Vector2(-386, -28)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_cwd6d")
+autoplay = "default"
+
+[node name="Sprite2D5" type="AnimatedSprite2D" parent="."]
+position = Vector2(-213, -235)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_cwd6d")
+autoplay = "default"

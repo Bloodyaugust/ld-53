@@ -1,9 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://cnhcusftdvyau"]
+[gd_scene load_steps=7 format=3 uid="uid://cnhcusftdvyau"]
 
 [ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_60qlv"]
 [ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_hy6tv"]
 [ext_resource type="PackedScene" uid="uid://d1ofs7std6p1f" path="res://actors/Obstacles/Ball.tscn" id="3_7mbsc"]
-[ext_resource type="Texture2D" uid="uid://4typrc2p2rra" path="res://icon.png" id="4_by6qu"]
+[ext_resource type="Texture2D" uid="uid://duh6h2f5necwy" path="res://sprites/buttons/up1.png" id="4_estth"]
+[ext_resource type="Texture2D" uid="uid://cmmc3txx8arpv" path="res://sprites/buttons/up2.png" id="5_48hv1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mlbht"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_estth")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_48hv1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
 
 [node name="BackgroundChunk" type="Node2D"]
 script = ExtResource("1_60qlv")
@@ -14,6 +29,9 @@ texture = ExtResource("2_hy6tv")
 [node name="Obstacle" parent="." instance=ExtResource("3_7mbsc")]
 position = Vector2(150, 150)
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
+[node name="Sprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(-89, -1)
-texture = ExtResource("4_by6qu")
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_mlbht")
+autoplay = "default"
+frame_progress = 0.250596
