@@ -2,13 +2,13 @@ extends Node2D
 
 const CHUNKS_GENERATED: int = 3
 const DROPOFF_POINT_SCENE: PackedScene = preload("res://actors/DropoffPoint.tscn")
-const OBSTACLE_SCENE: PackedScene = preload("res://actors/Obstacle.tscn")
 
 @onready var _background_chunks_container: Node2D = %BackgroundChunks
 @onready var _dropoff_points_container: Node2D = %DropoffPoints
 @onready var _obstacles_container: Node2D = %Obstacles
 
 var _background_chunk_scenes: Array
+var _obstacle_scenes: Array
 
 func _on_store_state_changed(state_key: String, substate) -> void:
   match state_key:
@@ -42,7 +42,7 @@ func _process(delta):
       _dropoff_points_container.add_child(_new_dropoff_point)
 
     if Store.state.game == GameConstants.GAME_IN_PROGRESS:
-      var _new_obstacle = OBSTACLE_SCENE.instantiate()
+      var _new_obstacle = _obstacle_scenes[randi() % _obstacle_scenes.size()].instantiate()
       _new_obstacle.global_position = _new_chunk.global_position + Vector2(randf_range(-1920.0 / 2.0, 1920.0 / 2.0), _new_obstacle.position.y)
 
       _obstacles_container.add_child(_new_obstacle)
@@ -54,3 +54,8 @@ func _ready():
 
   for _chunk_path in _chunk_scenes:
     _background_chunk_scenes.append(load("res://actors/BackgroundChunks/" + _chunk_path))
+
+  var _obstacle_scene_paths = DirAccess.get_files_at("res://actors/Obstacles/")
+
+  for _obstacle_path in _obstacle_scene_paths:
+    _obstacle_scenes.append(load("res://actors/Obstacles/" + _obstacle_path))

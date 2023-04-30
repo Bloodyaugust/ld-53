@@ -78,7 +78,7 @@ scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_opsxp")
 autoplay = "default"
 frame = 2
-frame_progress = 0.996353
+frame_progress = 0.0345937
 
 [node name="PlayerArea" type="Area2D" parent="Player"]
 unique_name_in_owner = true

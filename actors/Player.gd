@@ -44,7 +44,7 @@ func _jump() -> void:
 
   _tween.tween_callback(func():
     _state = STATES.RUNNING
-    _sprite.play("default")
+    _sprite.play_backwards()
   )
 
 func _on_area_2d_entered(area: Area2D) -> void:
@@ -66,7 +66,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
       _tween.tween_property(self, "global_position", Vector2(global_position.x, 0.0), 0.15)
       _tween.tween_callback(func():
         _state = STATES.RUNNING
-        _sprite.play("default")
+        _sprite.play_backwards()
       )
 
   if area.is_in_group("dropoff"):
@@ -96,7 +96,7 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _tween.tween_property(self, "position", Vector2(-600.0, 0.0), 1.0)
           _tween.tween_callback(func():
             _state = STATES.RUNNING
-            _sprite.play("default")
+            _sprite.play_backwards()
 
             Store.set_state("game", GameConstants.GAME_IN_PROGRESS)
           )
