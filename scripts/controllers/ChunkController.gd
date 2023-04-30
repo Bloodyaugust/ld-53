@@ -43,7 +43,7 @@ func _process(delta):
 
     if Store.state.game == GameConstants.GAME_IN_PROGRESS:
       var _new_obstacle = OBSTACLE_SCENE.instantiate()
-      _new_obstacle.global_position = _new_chunk.global_position + Vector2(randf_range(-1920.0 / 2.0, 1920.0 / 2.0), 0.0)
+      _new_obstacle.global_position = _new_chunk.global_position + Vector2(randf_range(-1920.0 / 2.0, 1920.0 / 2.0), _new_obstacle.position.y)
 
       _obstacles_container.add_child(_new_obstacle)
 

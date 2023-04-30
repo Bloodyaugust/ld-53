@@ -30,6 +30,10 @@ window/size/viewport_height=1080
 window/stretch/mode="2d"
 window/dpi/allow_hidpi=false
 
+[editor]
+
+movie_writer/movie_file="C:/Code/ld-53/media/main-capture.avi"
+
 [editor_plugins]
 
 enabled=PackedStringArray()
@@ -71,4 +75,6 @@ file_logging/enable_file_logging=true
 
 [rendering]
 
+anti_aliasing/quality/msaa_2d=2
+anti_aliasing/quality/screen_space_aa=1
 environment/default_environment="res://default_env.tres"

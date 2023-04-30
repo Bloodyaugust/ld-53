@@ -23,7 +23,7 @@ func _jump() -> void:
   if _tween:
     _tween.kill()
 
-  _tween = create_tween().set_trans(Tween.TRANS_CUBIC)  
+  _tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
   match _state:
     STATES.RUNNING:
@@ -31,13 +31,14 @@ func _jump() -> void:
     STATES.JUMPING:
       _state = STATES.DOUBLEJUMPING
 
-  _tween.tween_property(self, "position", Vector2(position.x, position.y - data.jump_height), 0.25)
+  _tween.tween_property(self, "position", Vector2(position.x, position.y - data.jump_height), data.jump_time_to_apex)
+  _tween.set_ease(Tween.EASE_IN)
 
   match _state:
     STATES.JUMPING:
-      _tween.tween_property(self, "position", Vector2(position.x, 0), 0.25)
+      _tween.tween_property(self, "position", Vector2(position.x, 0), data.jump_time_to_fall)
     STATES.DOUBLEJUMPING:
-      _tween.tween_property(self, "position", Vector2(position.x, 0), 0.5)
+      _tween.tween_property(self, "position", Vector2(position.x, 0), data.jump_time_to_fall * 2)
 
   _tween.tween_callback(func(): _state = STATES.RUNNING)
 
@@ -106,7 +107,7 @@ func _process(delta):
       if Input.is_action_just_pressed("move_up"):
         _jump()
     STATES.JUMPING:
-      if Input.is_action_just_pressed("move_up") && _tween.get_total_elapsed_time() > 0.25 && _tween.get_total_elapsed_time() < 0.35:
+      if Input.is_action_just_pressed("move_up") && _tween.get_total_elapsed_time() > data.jump_time_to_apex - (data.jump_time_to_double_after_apex / 2) && _tween.get_total_elapsed_time() < data.jump_time_to_apex + (data.jump_time_to_double_after_apex / 2):
         _jump()
 
 func _ready():
