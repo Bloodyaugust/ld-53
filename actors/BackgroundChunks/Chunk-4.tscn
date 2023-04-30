@@ -11,4 +11,4 @@ script = ExtResource("1_sxn3a")
 texture = ExtResource("2_hgcxq")
 
 [node name="Obstacle" parent="." instance=ExtResource("3_jj61b")]
-position = Vector2(1, 94)
+position = Vector2(1, 79)
