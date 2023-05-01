@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://tlk13ktn3ypx"]
 
 [ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_f7l54"]
-[ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_6icpu"]
+[ext_resource type="Texture2D" uid="uid://cvk3jhhh3a3gh" path="res://sprites/Background2.png" id="2_75emd"]
 [ext_resource type="Texture2D" uid="uid://duh6h2f5necwy" path="res://sprites/buttons/up1.png" id="4_6cbxy"]
 [ext_resource type="PackedScene" uid="uid://bdu4rq6w268cu" path="res://actors/Obstacles/Dog.tscn" id="4_6jair"]
 [ext_resource type="Texture2D" uid="uid://cmmc3txx8arpv" path="res://sprites/buttons/up2.png" id="5_5gjag"]
@@ -25,7 +25,7 @@ script = ExtResource("1_f7l54")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
-texture = ExtResource("2_6icpu")
+texture = ExtResource("2_75emd")
 
 [node name="Obstacle" parent="." instance=ExtResource("4_6jair")]
 position = Vector2(177, 79)

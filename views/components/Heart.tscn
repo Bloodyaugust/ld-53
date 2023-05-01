@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://views/components/Heart.gd" id="2_5jbvv"]
 
 [node name="Heart" type="TextureRect"]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(80, 80)
 texture = ExtResource("1_8fsbn")
 expand_mode = 1
 stretch_mode = 4
