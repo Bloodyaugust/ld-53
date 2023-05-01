@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=40 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dkebah7fnyvlo" path="res://actors/BackgroundChunks/Chunk-1.tscn" id="9_7rlw0"]
 [ext_resource type="Texture2D" uid="uid://tqrm24aqlhhf" path="res://sprites/player/player_shadow.png" id="9_ejika"]
 [ext_resource type="Script" path="res://scripts/controllers/ChunkController.gd" id="10_4x66y"]
+[ext_resource type="Texture2D" uid="uid://comguw64ivrlx" path="res://sprites/fuckingSTAR.png" id="10_y6nx4"]
 [ext_resource type="Texture2D" uid="uid://b2w5uctwiphuj" path="res://sprites/truck/title.png" id="12_hatlg"]
 [ext_resource type="Script" path="res://views/Results.gd" id="13_pcmex"]
 [ext_resource type="Texture2D" uid="uid://pxv48m0yox7y" path="res://sprites/smoke.png" id="14_36ilv"]
@@ -58,6 +59,10 @@ animations = [{
 "name": &"default",
 "speed": 10.0
 }]
+
+[sub_resource type="Curve" id="Curve_76gks"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.116343, 1), 0.0, 0.0, 0, 0, Vector2(0.706371, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d80xq"]
 size = Vector2(195, 301)
@@ -99,6 +104,43 @@ sprite_frames = SubResource("SpriteFrames_opsxp")
 autoplay = "default"
 frame = 2
 frame_progress = 0.0345937
+
+[node name="DropoffPackageEffect" type="CPUParticles2D" parent="Player/PlayerSprite"]
+unique_name_in_owner = true
+position = Vector2(-68, -796)
+scale = Vector2(4, 4)
+emitting = false
+amount = 1
+lifetime = 0.5
+one_shot = true
+local_coords = true
+texture = ExtResource("23_vndkb")
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_76gks")
+
+[node name="DropoffStarEffect" type="CPUParticles2D" parent="Player/PlayerSprite"]
+unique_name_in_owner = true
+position = Vector2(-68, -1716)
+scale = Vector2(4, 4)
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+texture = ExtResource("10_y6nx4")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+scale_amount_min = 0.4
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_76gks")
 
 [node name="PlayerArea" type="Area2D" parent="Player"]
 unique_name_in_owner = true

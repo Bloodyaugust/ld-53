@@ -16,6 +16,8 @@ const TRIP_EFFECT_SCENE: PackedScene = preload("res://actors/TripEffect.tscn")
 @export var data: PlayerData
 
 @onready var _area2D: Area2D = %PlayerArea
+@onready var _dropoff_package_effect: CPUParticles2D = %DropoffPackageEffect
+@onready var _dropoff_star_effect: CPUParticles2D = %DropoffStarEffect
 @onready var _health: int = data.health
 @onready var _shadow: Sprite2D = %PlayerShadow
 @onready var _shadow_baseline: Vector2 = _shadow.global_position
@@ -56,7 +58,7 @@ func _jump() -> void:
   )
 
 func _on_area_2d_entered(area: Area2D) -> void:
-  if area.is_in_group("obstacle"):
+  if area.is_in_group("obstacle") && Store.state.game == GameConstants.GAME_IN_PROGRESS:
     if _tween:
       _tween.kill()
 
@@ -147,6 +149,8 @@ func _process(delta):
 
       if GDUtil.reference_safe(_mailbox) && Input.is_action_just_pressed("move_down"):
         if _mailbox.deliver():
+          _dropoff_package_effect.emitting = true
+          get_tree().create_timer(0.5).timeout.connect(func(): _dropoff_star_effect.emitting = true)
           Store.set_state("packages", Store.state.packages + 1)
 
     STATES.JUMPING:
