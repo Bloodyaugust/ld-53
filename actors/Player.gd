@@ -18,7 +18,9 @@ signal damaged
 @onready var _dropoff_star_effect: CPUParticles2D = %DropoffStarEffect
 @onready var _double_jump_effect: CPUParticles2D = %DoubleJumpEffect
 @onready var _health: int = data.health
+@onready var _jump_player: AudioStreamPlayer2D = %PlayerJumpPlayer
 @onready var _landing_effect: CPUParticles2D = %LandingEffect
+@onready var _oof_player: AudioStreamPlayer2D = %PlayerOofPlayer
 @onready var _shadow: Sprite2D = %PlayerShadow
 @onready var _shadow_baseline: Vector2 = _shadow.global_position
 @onready var _shadow_baseline_scale: Vector2 = _shadow.scale
@@ -35,6 +37,7 @@ func _jump() -> void:
   if _tween:
     _tween.kill()
 
+  _jump_player.play()
   _sprite.pause()
   _tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
@@ -65,6 +68,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
     _trip_effect.emitting = true
     _health -= 1
     _sprite.pause()
+    _oof_player.play()
     emit_signal("damaged")
 
     if _health <= 0:
@@ -119,7 +123,9 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           _sprite.play()
           _tween = create_tween().set_trans(Tween.TRANS_LINEAR)
           _tween.tween_property(self, "global_position", _truck.global_position, 1.0)
-          _tween.tween_callback(func(): _sprite.pause())
+          _tween.tween_callback(func():
+            _sprite.pause()
+          )
         GameConstants.GAME_STARTING:
           if _tween:
             _tween.kill()

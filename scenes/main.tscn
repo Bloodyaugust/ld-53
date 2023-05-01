@@ -1,14 +1,16 @@
-[gd_scene load_steps=47 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=49 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
 [ext_resource type="Script" path="res://actors/Player.gd" id="2_2opep"]
+[ext_resource type="AudioStream" uid="uid://dm0denb0qnr1x" path="res://resources/sfx/jump.wav" id="3_d2ndn"]
 [ext_resource type="Texture2D" uid="uid://m1ydtfvcivan" path="res://sprites/player/man1.png" id="3_ke3ru"]
 [ext_resource type="Resource" uid="uid://tsqf267nyyx7" path="res://data/base_player_data.tres" id="3_o2wyl"]
 [ext_resource type="Script" path="res://views/MainMenu.gd" id="4"]
 [ext_resource type="Texture2D" uid="uid://di3bdtj4s4q3a" path="res://sprites/player/man2.png" id="4_b4grh"]
 [ext_resource type="Texture2D" uid="uid://bpmkijjlkgnri" path="res://sprites/truck/truck1.png" id="4_d7i24"]
 [ext_resource type="Script" path="res://actors/Truck.gd" id="4_po0hw"]
+[ext_resource type="AudioStream" uid="uid://bbjb607vtbp2u" path="res://resources/sfx/oof.wav" id="4_vp2br"]
 [ext_resource type="PackedScene" path="res://lib/BetterCam.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://crcwxrlvujk6w" path="res://sprites/player/man3.png" id="5_ag63u"]
 [ext_resource type="Texture2D" uid="uid://bhgijg3ck2bga" path="res://sprites/truck/truck2.png" id="5_y3wc5"]
@@ -116,6 +118,24 @@ unique_name_in_owner = true
 position = Vector2(-600, 0)
 script = ExtResource("2_2opep")
 data = ExtResource("3_o2wyl")
+
+[node name="PlayerJumpPlayer" type="AudioStreamPlayer2D" parent="Player"]
+unique_name_in_owner = true
+position = Vector2(-900, 120)
+scale = Vector2(0.8, 0.8)
+stream = ExtResource("3_d2ndn")
+volume_db = 13.52
+panning_strength = 0.5
+bus = &"Sfx"
+
+[node name="PlayerOofPlayer" type="AudioStreamPlayer2D" parent="Player"]
+unique_name_in_owner = true
+position = Vector2(-900, 120)
+scale = Vector2(0.8, 0.8)
+stream = ExtResource("4_vp2br")
+volume_db = 13.52
+panning_strength = 0.5
+bus = &"Sfx"
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Player"]
 unique_name_in_owner = true
@@ -259,7 +279,7 @@ texture = ExtResource("12_hatlg")
 
 [node name="TruckExhaust" type="CPUParticles2D" parent="Truck"]
 unique_name_in_owner = true
-position = Vector2(-582.5, 318.75)
+position = Vector2(-617.5, 318.75)
 texture = ExtResource("14_36ilv")
 direction = Vector2(-1, 0)
 gravity = Vector2(0, -980)
