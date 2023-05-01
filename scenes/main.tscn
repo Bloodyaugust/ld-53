@@ -322,6 +322,7 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="FPS" type="MarginContainer" parent="UIRoot"]
+visible = false
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 

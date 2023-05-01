@@ -62,19 +62,30 @@ func _jump() -> void:
 
 func _on_area_2d_entered(area: Area2D) -> void:
   if area.is_in_group("obstacle") && Store.state.game == GameConstants.GAME_IN_PROGRESS:
-    if _tween:
-      _tween.kill()
-
     _trip_effect.emitting = true
     _health -= 1
+    _sprite.pause()
     emit_signal("damaged")
 
     if _health <= 0:
-      _state = STATES.RESETTING
-      Store.state.move_speed = 0.0
-      Store.set_state("game", GameConstants.GAME_ENDING)
+      if _tween.is_running():
+        _tween.kill()
+  
+        _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
+        _tween.tween_property(self, "position", Vector2(position.x, 0), data.jump_time_to_fall)
+        _tween.tween_callback(func():
+          _state = STATES.RESETTING
+          Store.state.move_speed = 0.0
+          Store.set_state("game", GameConstants.GAME_ENDING)
+        )
+      else:
+        _state = STATES.RESETTING
+        Store.state.move_speed = 0.0
+        Store.set_state("game", GameConstants.GAME_ENDING)
     else:
-      _sprite.pause()
+      if _tween:
+        _tween.kill()
+
       _state = STATES.TRIPPING
       _tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 
@@ -105,8 +116,10 @@ func _on_store_state_changed(state_key: String, substate) -> void:
           if _tween:
             _tween.kill()
 
+          _sprite.play()
           _tween = create_tween().set_trans(Tween.TRANS_LINEAR)
           _tween.tween_property(self, "global_position", _truck.global_position, 1.0)
+          _tween.tween_callback(func(): _sprite.pause())
         GameConstants.GAME_STARTING:
           if _tween:
             _tween.kill()
