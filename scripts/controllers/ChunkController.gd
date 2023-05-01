@@ -4,8 +4,20 @@ const CHUNKS_GENERATED: int = 3
 
 @onready var _background_chunks_container: Node2D = %BackgroundChunks
 
-var _background_chunk_scenes: Array
-var _tutorial_chunk_scenes: Array
+const _background_chunk_scenes: Array = [
+  preload("res://actors/BackgroundChunks/Chunk-1.tscn"),
+  preload("res://actors/BackgroundChunks/Chunk-2.tscn"),
+  preload("res://actors/BackgroundChunks/Chunk-3.tscn"),
+  preload("res://actors/BackgroundChunks/Chunk-4.tscn"),
+  preload("res://actors/BackgroundChunks/Chunk-5.tscn"),
+  preload("res://actors/BackgroundChunks/Chunk-6.tscn"),
+  preload("res://actors/BackgroundChunks/Chunk-7.tscn"),
+]
+const _tutorial_chunk_scenes: Array = [
+  preload("res://actors/TutorialChunks/Chunk-1.tscn"),
+  preload("res://actors/TutorialChunks/Chunk-2.tscn"),
+  preload("res://actors/TutorialChunks/Chunk-3.tscn"),
+]
 
 func _on_store_state_changed(_state_key: String, _substate) -> void:
   pass
@@ -35,13 +47,3 @@ func _process(_delta):
 
 func _ready():
   Store.state_changed.connect(_on_store_state_changed)
-
-  var _chunk_scenes = DirAccess.get_files_at("res://actors/BackgroundChunks/")
-
-  for _chunk_path in _chunk_scenes:
-    _background_chunk_scenes.append(load("res://actors/BackgroundChunks/" + _chunk_path))
-
-  var _tutorial_chunk_paths = DirAccess.get_files_at("res://actors/TutorialChunks/")
-
-  for _chunk_path in _tutorial_chunk_paths:
-    _tutorial_chunk_scenes.append(load("res://actors/TutorialChunks/" + _chunk_path))
