@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=47 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -27,12 +27,15 @@
 [ext_resource type="Script" path="res://views/HUD.gd" id="14_q0ovd"]
 [ext_resource type="Texture2D" uid="uid://h5rl4l7asebq" path="res://sprites/buttons/playbutton2.png" id="15_ok0r8"]
 [ext_resource type="Texture2D" uid="uid://2ii8tldibe8m" path="res://sprites/buttons/about.png" id="16_bo7md"]
+[ext_resource type="AudioStream" uid="uid://blbb1f46lpiy6" path="res://resources/sfx/truck-engine-start.wav" id="17_tnvvg"]
+[ext_resource type="AudioStream" uid="uid://x06ciljw56nt" path="res://resources/sfx/truck-engine-idle.wav" id="18_4qn5y"]
 [ext_resource type="Texture2D" uid="uid://doftu26upxvt7" path="res://sprites/buttons/sound1.png" id="19_f3oqv"]
 [ext_resource type="PackedScene" uid="uid://6u7x7610b7w6" path="res://views/components/Heart.tscn" id="21_11etq"]
 [ext_resource type="Texture2D" uid="uid://bebeurdq17kv4" path="res://sprites/buttons/gameover.png" id="21_l2cgg"]
 [ext_resource type="Texture2D" uid="uid://jphsjrcbsy2f" path="res://sprites/buttons/menubutton1.png" id="23_bb003"]
 [ext_resource type="Texture2D" uid="uid://48ieny0rfsml" path="res://sprites/buttons/package.png" id="23_vndkb"]
 [ext_resource type="Texture2D" uid="uid://jasv0xkkitpo" path="res://sprites/buttons/menubutton2.png" id="24_rtdnq"]
+[ext_resource type="AudioStream" uid="uid://c43xamrivpix7" path="res://resources/music/skyscrapersamba_eq_lessdrums.mp3" id="34_bctvp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_opsxp"]
 animations = [{
@@ -271,6 +274,18 @@ scale_amount_max = 0.3
 scale_amount_curve = SubResource("Curve_etq1d")
 color_ramp = SubResource("Gradient_3f1vw")
 
+[node name="TruckStartupPlayer" type="AudioStreamPlayer2D" parent="Truck"]
+unique_name_in_owner = true
+stream = ExtResource("17_tnvvg")
+bus = &"Sfx"
+
+[node name="TruckIdlePlayer" type="AudioStreamPlayer2D" parent="Truck"]
+unique_name_in_owner = true
+stream = ExtResource("18_4qn5y")
+autoplay = true
+max_polyphony = 2
+bus = &"Sfx"
+
 [node name="UIRoot" type="CanvasLayer" parent="."]
 
 [node name="MainMenu" type="Control" parent="UIRoot"]
@@ -493,3 +508,8 @@ z_index = -2
 
 [node name="ChunkController" type="Node2D" parent="."]
 script = ExtResource("10_4x66y")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("34_bctvp")
+autoplay = true
+bus = &"Music"
