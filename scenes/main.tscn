@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bfjaqu2i4i63i"]
+[gd_scene load_steps=50 format=3 uid="uid://bfjaqu2i4i63i"]
 
 [ext_resource type="Script" path="res://views/FPS.gd" id="1"]
 [ext_resource type="Theme" uid="uid://co811ue55i33m" path="res://resources/base_theme.tres" id="2_1ffbx"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://actors/Truck.gd" id="4_po0hw"]
 [ext_resource type="AudioStream" uid="uid://bbjb607vtbp2u" path="res://resources/sfx/oof.wav" id="4_vp2br"]
 [ext_resource type="PackedScene" path="res://lib/BetterCam.tscn" id="5"]
+[ext_resource type="AudioStream" uid="uid://dxxw35ag7bkk3" path="res://resources/sfx/sparkle.wav" id="5_2fwe1"]
 [ext_resource type="Texture2D" uid="uid://crcwxrlvujk6w" path="res://sprites/player/man3.png" id="5_ag63u"]
 [ext_resource type="Texture2D" uid="uid://bhgijg3ck2bga" path="res://sprites/truck/truck2.png" id="5_y3wc5"]
 [ext_resource type="Texture2D" uid="uid://dymlkxaakksjn" path="res://sprites/player/man4.png" id="6_k6x3b"]
@@ -134,6 +135,15 @@ position = Vector2(-900, 120)
 scale = Vector2(0.8, 0.8)
 stream = ExtResource("4_vp2br")
 volume_db = 13.52
+panning_strength = 0.5
+bus = &"Sfx"
+
+[node name="PlayerSparklePlayer" type="AudioStreamPlayer2D" parent="Player"]
+unique_name_in_owner = true
+position = Vector2(-900, 120)
+scale = Vector2(0.8, 0.8)
+stream = ExtResource("5_2fwe1")
+volume_db = 20.0
 panning_strength = 0.5
 bus = &"Sfx"
 

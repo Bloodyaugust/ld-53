@@ -24,6 +24,7 @@ signal damaged
 @onready var _shadow: Sprite2D = %PlayerShadow
 @onready var _shadow_baseline: Vector2 = _shadow.global_position
 @onready var _shadow_baseline_scale: Vector2 = _shadow.scale
+@onready var _sparkle_player: AudioStreamPlayer2D = %PlayerSparklePlayer
 @onready var _sprite: AnimatedSprite2D = %PlayerSprite
 @onready var _trip_effect: CPUParticles2D = %TripEffect
 @onready var _truck: Node2D = %Truck
@@ -37,17 +38,19 @@ func _jump() -> void:
   if _tween:
     _tween.kill()
 
-  _jump_player.play()
   _sprite.pause()
   _tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
   match _state:
     STATES.RUNNING:
       _state = STATES.JUMPING
+      _jump_player.pitch_scale = randf_range(0.9, 0.95)
     STATES.JUMPING:
       _state = STATES.DOUBLEJUMPING
       _double_jump_effect.emitting = true
+      _jump_player.pitch_scale = randf_range(1.05, 1.1)
 
+  _jump_player.play()
   _tween.tween_property(self, "position", Vector2(position.x, position.y - data.jump_height), data.jump_time_to_apex)
   _tween.set_ease(Tween.EASE_IN)
 
@@ -68,6 +71,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
     _trip_effect.emitting = true
     _health -= 1
     _sprite.pause()
+    _oof_player.pitch_scale = randf_range(0.9, 1.1)
     _oof_player.play()
     emit_signal("damaged")
 
@@ -169,7 +173,10 @@ func _process(delta):
       if GDUtil.reference_safe(_mailbox) && Input.is_action_just_pressed("move_down"):
         if _mailbox.deliver():
           _dropoff_package_effect.emitting = true
-          get_tree().create_timer(0.5).timeout.connect(func(): _dropoff_star_effect.emitting = true)
+          get_tree().create_timer(0.5).timeout.connect(func():
+            _dropoff_star_effect.emitting = true
+            _sparkle_player.play()
+          )
           Store.set_state("packages", Store.state.packages + 1)
 
     STATES.JUMPING:
