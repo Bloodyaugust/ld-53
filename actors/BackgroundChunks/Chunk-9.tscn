@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmichgc5t6agi"]
+
+[ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_0aqej"]
+[ext_resource type="Texture2D" uid="uid://cvk3jhhh3a3gh" path="res://sprites/Background2.png" id="2_mktof"]
+
+[node name="BackgroundChunk" type="Node2D"]
+script = ExtResource("1_0aqej")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture = ExtResource("2_mktof")

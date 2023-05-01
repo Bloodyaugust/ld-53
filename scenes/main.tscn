@@ -473,6 +473,7 @@ theme_override_font_sizes/font_size = 60
 text = "100"
 
 [node name="HUD" type="MarginContainer" parent="UIRoot"]
+visible = false
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0

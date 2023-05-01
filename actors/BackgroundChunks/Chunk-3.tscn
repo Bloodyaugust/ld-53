@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://2x3hpqfy56ls"]
 
 [ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_2dtq0"]
-[ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_bitct"]
+[ext_resource type="Texture2D" uid="uid://cvk3jhhh3a3gh" path="res://sprites/Background2.png" id="2_jxj5y"]
 [ext_resource type="PackedScene" uid="uid://d1ofs7std6p1f" path="res://actors/Obstacles/Ball.tscn" id="3_2mpnj"]
 
 [node name="BackgroundChunk" type="Node2D"]
@@ -9,7 +9,7 @@ script = ExtResource("1_2dtq0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
-texture = ExtResource("2_bitct")
+texture = ExtResource("2_jxj5y")
 
 [node name="Obstacle" parent="." instance=ExtResource("3_2mpnj")]
 position = Vector2(600, 149)

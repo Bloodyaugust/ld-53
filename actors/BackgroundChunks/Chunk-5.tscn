@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://i01jhsmbl83k"]
 
 [ext_resource type="Script" path="res://actors/BackgroundChunk.gd" id="1_ve04h"]
-[ext_resource type="Texture2D" uid="uid://b3hocc7uwfr6e" path="res://sprites/Background.png" id="2_jy7qi"]
+[ext_resource type="Texture2D" uid="uid://cvk3jhhh3a3gh" path="res://sprites/Background2.png" id="2_ci8xj"]
 [ext_resource type="PackedScene" uid="uid://b2rkn3jrong4f" path="res://actors/DropoffPoint.tscn" id="3_dgvfe"]
 
 [node name="BackgroundChunk" type="Node2D"]
@@ -9,7 +9,7 @@ script = ExtResource("1_ve04h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -1
-texture = ExtResource("2_jy7qi")
+texture = ExtResource("2_ci8xj")
 
 [node name="DropoffPoint" parent="." instance=ExtResource("3_dgvfe")]
-position = Vector2(-496, -58)
+position = Vector2(574, -60)
