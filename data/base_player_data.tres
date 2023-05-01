@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_72stq")
-health = 2
+health = 3
 jump_height = 180.0
 jump_time_to_apex = 0.45
 jump_time_to_fall = 0.3

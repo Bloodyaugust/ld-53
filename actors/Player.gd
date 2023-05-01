@@ -11,18 +11,19 @@ enum STATES {
 
 signal damaged
 
-const TRIP_EFFECT_SCENE: PackedScene = preload("res://actors/TripEffect.tscn")
-
 @export var data: PlayerData
 
 @onready var _area2D: Area2D = %PlayerArea
 @onready var _dropoff_package_effect: CPUParticles2D = %DropoffPackageEffect
 @onready var _dropoff_star_effect: CPUParticles2D = %DropoffStarEffect
+@onready var _double_jump_effect: CPUParticles2D = %DoubleJumpEffect
 @onready var _health: int = data.health
+@onready var _landing_effect: CPUParticles2D = %LandingEffect
 @onready var _shadow: Sprite2D = %PlayerShadow
 @onready var _shadow_baseline: Vector2 = _shadow.global_position
 @onready var _shadow_baseline_scale: Vector2 = _shadow.scale
 @onready var _sprite: AnimatedSprite2D = %PlayerSprite
+@onready var _trip_effect: CPUParticles2D = %TripEffect
 @onready var _truck: Node2D = %Truck
 
 var _mailbox: Node2D
@@ -42,6 +43,7 @@ func _jump() -> void:
       _state = STATES.JUMPING
     STATES.JUMPING:
       _state = STATES.DOUBLEJUMPING
+      _double_jump_effect.emitting = true
 
   _tween.tween_property(self, "position", Vector2(position.x, position.y - data.jump_height), data.jump_time_to_apex)
   _tween.set_ease(Tween.EASE_IN)
@@ -55,6 +57,7 @@ func _jump() -> void:
   _tween.tween_callback(func():
     _state = STATES.RUNNING
     _sprite.play_backwards()
+    _landing_effect.emitting = true
   )
 
 func _on_area_2d_entered(area: Area2D) -> void:
@@ -62,10 +65,7 @@ func _on_area_2d_entered(area: Area2D) -> void:
     if _tween:
       _tween.kill()
 
-    var _new_trip_effect: Node2D = TRIP_EFFECT_SCENE.instantiate()
-    get_tree().get_root().add_child(_new_trip_effect)
-    _new_trip_effect.global_position = _sprite.global_position
-
+    _trip_effect.emitting = true
     _health -= 1
     emit_signal("damaged")
 
